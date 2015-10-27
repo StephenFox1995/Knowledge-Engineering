@@ -121,16 +121,21 @@
 
 
 
-;; ****************
+;; ****************************************
 ;; GUI Code here.
+;; ****************************************
 
-(deffunction submit-fact ()
-  (assert (job (value writing))))
 
 (defglobal ?*frame* = 0)
 (defglobal ?*textField* = 0)
 (defglobal ?*button* = 0)
 (defglobal ?*comboBox* = 0)
+
+
+(deffunction submit-fact (?object ?value)
+  (if (= ?object Job) then
+    (assert (job (value ?value)))))
+
 
 (deffunction create-frame ()
   (bind ?*frame* (new JFrame "Media Advisor"))
@@ -159,7 +164,7 @@
   (?*frame* setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE))
     (?*button* addActionListener (implement ActionListener using
     (lambda (?event)
-      (submit-fact)))))
+      (submit-fact job ket)))))
 
 
 (deffunction show-frame ()
