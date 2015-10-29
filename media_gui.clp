@@ -1,3 +1,4 @@
+(watch all)
 (import javax.swing.*)
 (import javax.swing.JFrame)
 (import java.awt.event.ActionListener)
@@ -133,8 +134,10 @@
 
 
 (deffunction submit-fact (?object ?value)
-  (if (= ?object Job) then
-    (assert (job (value ?value)))))
+  (printout t ?object crlf)
+  (if (eq ?object job) then
+    (printout t "job" crlf)))
+
 
 
 (deffunction create-frame ()
@@ -153,9 +156,6 @@
   (bind ?*comboBox* (new JComboBox))
   (?*comboBox* addItem "Environment")
   (?*comboBox* addItem "Job")
-  (?*comboBox* addItem "Stimulus Situation")
-  (?*comboBox* addItem "Stimulus Response")
-  (?*comboBox* addItem "FeedBack")
   (?*cPane* add ?*comboBox* (BorderLayout.CENTER)))
 
 
@@ -164,7 +164,7 @@
   (?*frame* setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE))
     (?*button* addActionListener (implement ActionListener using
     (lambda (?event)
-      (submit-fact job ket)))))
+      (submit-fact job (?*textField* getText))))))
 
 
 (deffunction show-frame ()
