@@ -141,8 +141,12 @@
 
   (if (eq ?object-sym Job) then
     (printout t "?object asserted as: ?value" crlf)
-    (assert (job (value ?value-sym))))
-    (run))
+    (assert (job (value ?value-sym)))
+  else
+  (if  (eq ?object-sym Environment) then
+    (assert (environment (value ?value-sym)))))
+
+  (run))
 
 
 
@@ -153,7 +157,7 @@
 
 
 (deffunction add-widgets ()
-  (bind ?*textField* (new JTextField "Search for:"))
+  (bind ?*textField* (new JTextField "Add:"))
   (?*cPane* add ?*textField* (BorderLayout.NORTH))
 
   (bind ?*button* (new JButton "Search"))
