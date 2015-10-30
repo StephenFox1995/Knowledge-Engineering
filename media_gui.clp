@@ -1,10 +1,10 @@
-(watch all)
 (import javax.swing.*)
 (import javax.swing.JFrame)
 (import java.awt.event.ActionListener)
 (import java.awt.BorderLayout)
 (import java.awt.Color)
 
+(watch all)
 
 (deftemplate environment "Environment"
   (slot value))
@@ -140,12 +140,11 @@
   (bind ?value-sym (sym-cat ?value))
 
   (if (eq ?object-sym Job) then
-    (printout t "?object asserted as: ?value" crlf)
     (assert (job (value ?value-sym)))
-  else
-  (if  (eq ?object-sym Environment) then
-    (assert (environment (value ?value-sym)))))
-
+  elif (eq ?object-sym Environment) then
+    (assert (environment (value ?value-sym)))
+  else (eq ?object-sym Feedback)
+    (assert (feedback (value ?value-sym))))
   (run))
 
 
@@ -166,6 +165,7 @@
   (bind ?*comboBox* (new JComboBox))
   (?*comboBox* addItem "Environment")
   (?*comboBox* addItem "Job")
+  (?*comboBox* addItem "Feedback")
   (?*cPane* add ?*comboBox* (BorderLayout.CENTER)))
 
 
