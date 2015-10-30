@@ -134,9 +134,15 @@
 
 
 (deffunction submit-fact (?object ?value)
-  (printout t ?object crlf)
-  (if (eq ?object job) then
-    (printout t "job" crlf)))
+  ;; Convert to symbol so we can use
+  ;; within our rules.
+  (bind ?object-sym (sym-cat ?object))
+  (bind ?value-sym (sym-cat ?value))
+
+  (if (eq ?object-sym Job) then
+    (printout t "?object asserted as: ?value" crlf)
+    (assert (job (value ?value-sym))))
+    (run))
 
 
 
@@ -164,7 +170,7 @@
   (?*frame* setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE))
     (?*button* addActionListener (implement ActionListener using
     (lambda (?event)
-      (submit-fact job (?*textField* getText))))))
+      (submit-fact (get ?*comboBox* selectedItem) (?*textField* getText))))))
 
 
 (deffunction show-frame ()
