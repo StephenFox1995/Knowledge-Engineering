@@ -160,7 +160,7 @@
   (bind ?*textField* (new JTextField "Add:"))
   (?*cPane* add ?*textField* (BorderLayout.NORTH))
 
-  (bind ?*button* (new JButton "Search"))
+  (bind ?*button* (new JButton "Add"))
   (?*cPane* add ?*button*  (BorderLayout.SOUTH))
 
   (bind ?*comboBox* (new JComboBox))
