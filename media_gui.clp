@@ -85,7 +85,7 @@
 (defrule rule10
   (stimulus-situation (value symbolic))
   (stimulus-response (value analytical))
-  (feedback (value is-required))
+  (feedback (value required))
   =>
   (assert (medium (value lecuture-tutorial))))
 
@@ -131,6 +131,7 @@
 (defglobal ?*textField* = 0)
 (defglobal ?*button* = 0)
 (defglobal ?*comboBox* = 0)
+(defglobal ?*resetButton* = 0)
 
 
 (deffunction submit-fact (?object ?value)
@@ -162,6 +163,11 @@
   (bind ?*button* (new JButton "Add"))
   (?*cPane* add ?*button*  (BorderLayout.SOUTH))
 
+  (bind ?*resetButton* (new JButton "Reset"))
+  (?*resetButton* setLocation 50 40)
+  (?*resetButton* setSize 50 20);
+  (?*cPane* add ?*resetButton*)
+
   (bind ?*comboBox* (new JComboBox))
   (?*comboBox* addItem "Environment")
   (?*comboBox* addItem "Job")
@@ -174,7 +180,13 @@
   (?*frame* setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE))
     (?*button* addActionListener (implement ActionListener using
     (lambda (?event)
-      (submit-fact (get ?*comboBox* selectedItem) (?*textField* getText))))))
+      (submit-fact (get ?*comboBox* selectedItem) (?*textField* getText)))))
+
+    ;; Resets working memory.
+    (?*resetButton* addActionListener (implement ActionListener using
+    (lambda (?event)
+      (printout t "Working memory reset." crlf)
+      (reset)))))
 
 
 (deffunction show-frame ()
