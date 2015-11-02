@@ -1,0 +1,9 @@
+Rule 15:
+computer-programs : environment.
+typing : job.
+
+Rule 16:
+environment : illustrations
+job : drawing
+
+

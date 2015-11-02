@@ -128,8 +128,7 @@
 
 (defrule rule16
   (environment (value illustrations))
-  (stimulus-response (value hands-on))
-  (stimulus-situation (value visual))
+  (stimulus-response (value documented))
   =>
   (assert (medium (value art-gallery))))
 
