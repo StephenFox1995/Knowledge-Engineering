@@ -1,5 +1,3 @@
-(clear)
-
 (deftemplate environment "Environment"
   (slot value))
 
@@ -18,7 +16,6 @@
 (deftemplate medium "Medium"
   (slot value))
 
-(assert (job (value writing)))
 
 
 (defrule rule1
@@ -72,7 +69,7 @@
 (defrule rule9
   (stimulus-situation (value physical-object))
   (stimulus-response (value hands-on))
-  (feedback (value is-required))
+  (feedback (value true))
   =>
   (assert (medium (value workshop))))
 
@@ -80,7 +77,7 @@
 (defrule rule10
   (stimulus-situation (value symbolic))
   (stimulus-response (value analytical))
-  (feedback (value is-required))
+  (feedback (value true))
   =>
   (assert (medium (value lecuture-tutorial))))
 
@@ -88,14 +85,14 @@
 (defrule rule11
   (stimulus-situation (value visual))
   (stimulus-response (value documented))
-  (feedback (value not-required))
+  (feedback (value false))
   =>
   (assert (medium (value video-cassette))))
 
 (defrule rule12
   (stimulus-situation (value visual))
   (stimulus-response (value oral))
-  (feedback (value required))
+  (feedback (value true))
   =>
   (assert (medium (value lecture-tutorial))))
 
@@ -103,15 +100,26 @@
 (defrule rule13
   (stimulus-situation (value verbal))
   (stimulus-response (value analytical))
-  (feedback (value required))
+  (feedback (value true))
   =>
   (assert (medium (value lecture-tutorial))))
 
 (defrule rule14
   (stimulus-situation (value verbal))
   (stimulus-response (value analytical))
-  (feedback (value required))
+  (feedback (value true))
   =>
   (assert (medium (value role-play-exercises))))
 
-(run)
+(defrule rule15
+  (stimulus-situation (value symbolic))
+  (stimulus-response (value documented))
+  (environment (value computer-programs))
+  =>
+  (assert (medium (value computer-room))))
+
+(defrule rule16
+  (environment (value illustrations))
+  (stimulus-response (value documented))
+  =>
+  (assert (medium (value art-gallery))))
